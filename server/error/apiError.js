@@ -6,7 +6,7 @@ class ApiError extends Error{
         this.massage=massage
     }
 
-    static bedRequst(massage){
+    static badRequest(massage){
         return new ApiError(404,massage)
     }
     

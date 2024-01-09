@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext} from 'react'
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
@@ -11,6 +11,13 @@ import {useNavigate} from 'react-router-dom';
 const NavBar =observer( () => {
     const {user}=useContext(Context)
     const navigate=useNavigate()
+
+    const logOut=()=>{
+      user.setUser({})
+      user.setIsAuth(false)
+      navigate('/')
+    }
+
   return (
     <Navbar bg="dark" data-bs-theme="dark">
         <Container>
@@ -18,7 +25,7 @@ const NavBar =observer( () => {
             {user.isAuth?
             <Nav className="ml-auto">
                 <Button variant={'outline-light'} className='ml-5' onClick={()=>navigate('/admin')}>Админ</Button>
-                <Button variant={'outline-light'} className='ml-5' onClick={()=>navigate('/')}>Выйти</Button>
+                <Button variant={'outline-light'} className='ml-5' onClick={()=>logOut()}>Выйти</Button>
             </Nav>
           :
           <Nav className="ml-auto">

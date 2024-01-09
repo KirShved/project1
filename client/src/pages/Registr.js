@@ -1,11 +1,33 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { Form, Container } from 'react-bootstrap';
-import {NavLink} from 'react-router-dom';
+import {NavLink, useNavigate} from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Card  from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
+import { registration } from '../http/userApi';
+import { useState } from 'react';
+import { observer } from 'mobx-react-lite';
+import { Context } from '..';
 
-const Registr = () => {
+const Registr = observer(() => {
+
+    const {user}=useContext(Context)
+    const navigate= useNavigate()
+    const [email,setEmail]=useState()
+    const [password,setPassword]=useState()
+
+    const click=async()=>{
+        try{
+        let data
+        data=await registration(email,password)
+        user.setUser(user)
+        user.setIsAuth(true)
+        navigate('/yaauth')
+        }catch(e){
+            alert('Пользователь с таким именем уже существует')
+        }
+    }
+
   return (
     <Container 
     className='d-flex justify-content-center align-items-center'
@@ -16,16 +38,20 @@ const Registr = () => {
                 <Form.Control 
                 className='mt-4'
                 placeholder='Введите ваш email...'
+                value={email}
+                onChange={e=>setEmail(e.target.value)}
                 />
                 <Form.Control 
                 className='mt-4'
                 placeholder='Введите ваш пороль...'
+                value={password}
+                onChange={e=>setPassword(e.target.value)}
                 />
                 <div className='d-flex justify-content-between mt-3 pl-3 pr-3'>
                     <div>
                         Уже есть аккаунт? <NavLink to='/autorization'>Войдите!</NavLink>
                     </div>
-                    <Button>
+                    <Button onClick={click}>
                         Войти
                     </Button>
                 </div>
@@ -34,5 +60,6 @@ const Registr = () => {
     </Container>
   )
 }
+)
 
 export default Registr
