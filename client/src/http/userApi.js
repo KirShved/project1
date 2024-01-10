@@ -8,13 +8,13 @@ export const registration=async(email,password)=>{
 }
 
 export const authorization=async(email,password)=>{
-    const {data}=await $host.post('api/user/autorization',{email,password})
-    localStorage.setItem('token',data.token)
-    return jwtDecode(data.token)
+        const {data}=await $host.post('api/user/autorization',{email,password})
+        localStorage.setItem('token',data.token)
+        return jwtDecode(data.token)
 }
 
 export const check=async()=>{
-    const {data}=await $authHost.get('api/user/auth')
-    localStorage.setItem('token',data.token)
-    return jwtDecode(data.token)
+        const {data}=await $authHost.get('api/user/auth')
+        localStorage.setItem('token',data.token)
+        return jwtDecode(data.token)
 }

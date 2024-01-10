@@ -14,6 +14,6 @@ module.exports=function(req,res,next){
         req.user=decoded
         next()
     }catch(e){
-        res.status(401).json({massage:"Вы не авторизованы"})
+        console.log('ты не авторизирован')
     }
 }

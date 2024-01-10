@@ -52,7 +52,7 @@ const Registr = observer(() => {
                         Уже есть аккаунт? <NavLink to='/autorization'>Войдите!</NavLink>
                     </div>
                     <Button onClick={click}>
-                        Войти
+                        Регистрация
                     </Button>
                 </div>
             </Form>
